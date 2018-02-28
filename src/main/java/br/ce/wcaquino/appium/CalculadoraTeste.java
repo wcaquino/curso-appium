@@ -3,6 +3,8 @@ package br.ce.wcaquino.appium;
 import java.net.MalformedURLException;
 import java.net.URL;
 
+import org.junit.Assert;
+import org.junit.Test;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
 import io.appium.java_client.MobileElement;
@@ -10,7 +12,8 @@ import io.appium.java_client.android.AndroidDriver;
 
 public class CalculadoraTeste {
 
-	public static void main(String[] args) throws MalformedURLException {
+	@Test
+	public void deveSomarDoisValores() throws MalformedURLException {
 		DesiredCapabilities desiredCapabilities = new DesiredCapabilities();
 	    desiredCapabilities.setCapability("platformName", "Android");
 	    desiredCapabilities.setCapability("deviceName", "emulator-5554");
@@ -27,6 +30,8 @@ public class CalculadoraTeste {
 	    MobileElement el5 = (MobileElement) driver.findElementById("com.android.calculator2:id/digit_2");
 	    el5.click();
 	    MobileElement el6 = (MobileElement) driver.findElementById("com.android.calculator2:id/result");
+//	    System.out.println(el6.getText());
+	    Assert.assertEquals("4", el6.getText());
 	    
 	    driver.quit();
 	}
