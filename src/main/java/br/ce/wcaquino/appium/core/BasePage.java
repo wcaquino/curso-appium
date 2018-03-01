@@ -2,7 +2,11 @@ package br.ce.wcaquino.appium.core;
 
 import static br.ce.wcaquino.appium.core.DriverFactory.getDriver;
 
+import java.util.List;
+
 import org.openqa.selenium.By;
+
+import io.appium.java_client.MobileElement;
 
 public class BasePage {
 
@@ -29,5 +33,10 @@ public class BasePage {
 	
 	public boolean isCheckMarcado(By by) {
 		return getDriver().findElement(by).getAttribute("checked").equals("true");
+	}
+	
+	public boolean existeElementoPorTexto(String texto) {
+		List<MobileElement> elementos = getDriver().findElements(By.xpath("//*[@text='"+texto+"']"));
+		return elementos.size() > 0;
 	}
 }
