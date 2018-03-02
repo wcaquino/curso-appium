@@ -102,4 +102,19 @@ public class BasePage {
 		.release()
 		.perform();
 	}
+	
+
+	public void swipeElement(MobileElement element, double inicio, double fim) {
+		int y = element.getLocation().y + (element.getSize().height / 2);
+		
+		int start_x = (int) (element.getSize().width * inicio);
+		int end_x = (int) (element.getSize().width * fim);
+		
+		new TouchAction(getDriver())
+		.press(start_x, y)
+		.waitAction(Duration.ofMillis(500))
+		.moveTo(end_x, y)
+		.release()
+		.perform();
+	}
 }

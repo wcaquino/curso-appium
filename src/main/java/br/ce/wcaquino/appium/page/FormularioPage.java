@@ -5,7 +5,6 @@ import static br.ce.wcaquino.appium.core.DriverFactory.getDriver;
 import org.openqa.selenium.By;
 
 import br.ce.wcaquino.appium.core.BasePage;
-import br.ce.wcaquino.appium.core.DriverFactory;
 import io.appium.java_client.MobileBy;
 import io.appium.java_client.MobileElement;
 

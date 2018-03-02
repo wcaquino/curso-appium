@@ -9,7 +9,6 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import br.ce.wcaquino.appium.core.BaseTest;
-import br.ce.wcaquino.appium.core.DriverFactory;
 import br.ce.wcaquino.appium.page.MenuPage;
 
 public class OpcaoEscondidaTest extends BaseTest {
