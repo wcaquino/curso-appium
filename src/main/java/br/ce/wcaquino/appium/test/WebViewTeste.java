@@ -1,6 +1,7 @@
 package br.ce.wcaquino.appium.test;
 
 import org.junit.After;
+import org.junit.Assert;
 import org.junit.Test;
 
 import br.ce.wcaquino.appium.core.BaseTest;
@@ -22,12 +23,14 @@ public class WebViewTeste extends BaseTest {
 		//preencher email
 		page.setEmail("a@a");
 		
-		
 		//senha
+		page.setSenha("a");
 		
 		//entrar
+		page.entrar();
 		
 		//verificar
+		Assert.assertEquals("Bem vindo, Wagner!", page.getMensagem());
 	}
 	
 	@After

@@ -6,7 +6,9 @@ import java.util.Set;
 
 import org.openqa.selenium.By;
 
-public class WebViewPage {
+import br.ce.wcaquino.appium.core.BasePage;
+
+public class WebViewPage extends BasePage {
 	
 	public void entrarContextoWeb(){
 		Set<String> contextHandles = getDriver().getContextHandles();
@@ -18,6 +20,18 @@ public class WebViewPage {
 
 	public void setEmail(String valor) {
 		getDriver().findElement(By.id("email")).sendKeys(valor);
+	}
+	
+	public void setSenha(String senha) {
+		getDriver().findElement(By.id("senha")).sendKeys(senha);
+	}
+	
+	public void entrar(){
+		clicar(By.xpath("//button[@type='submit']"));
+	}
+	
+	public String getMensagem(){
+		return obterTexto(By.xpath("//div[@class='alert alert-success']"));
 	}
 	
 	public void sairContextoWeb(){
