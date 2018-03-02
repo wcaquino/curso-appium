@@ -70,4 +70,20 @@ public class BasePage {
 			.release()
 			.perform();
 	}
+	
+	public void swipe(double inicio, double fim) {
+		Dimension size = getDriver().manage().window().getSize();
+		
+		int y = size.height / 2;
+		
+		int start_x = (int) (size.width * inicio);
+		int end_x = (int) (size.width * fim);
+		
+		new TouchAction(getDriver())
+		.press(start_x, y)
+		.waitAction(Duration.ofMillis(500))
+		.moveTo(end_x, y)
+		.release()
+		.perform();
+	}
 }
