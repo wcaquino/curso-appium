@@ -117,4 +117,10 @@ public class BasePage {
 		.release()
 		.perform();
 	}
+	
+	public void cliqueLongo(By by) {
+		new TouchAction(getDriver())
+		.longPress(getDriver().findElement(by))
+		.perform();
+	}
 }
