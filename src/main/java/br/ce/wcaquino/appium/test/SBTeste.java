@@ -52,7 +52,7 @@ public class SBTeste extends BaseTest {
 		menuSB.acessarContas();
 		
 		//clique longo na conta
-		contas.selecionarConta("123");
+		contas.selecionarConta("Conta mesmo nome");
 		
 		//ecluir
 		contas.excluir();

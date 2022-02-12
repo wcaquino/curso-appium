@@ -11,6 +11,6 @@ public class AccordionPage extends BasePage {
 	}
 	
 	public String obterValorOp1(){
-		return obterTexto(By.xpath("//*[@text='Opção 1']/../..//following-sibling::android.view.ViewGroup//android.widget.TextView"));
+		return obterTexto(By.xpath("//android.widget.TextView[@text='Opção 1']/../../following-sibling::android.view.ViewGroup//android.widget.TextView"));
 	}
 }

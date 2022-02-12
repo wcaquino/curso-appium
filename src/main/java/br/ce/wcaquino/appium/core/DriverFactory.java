@@ -28,11 +28,11 @@ public class DriverFactory {
         desiredCapabilities.setCapability("platformName", "Android");
         desiredCapabilities.setCapability("deviceName", "emulator-5554");
         desiredCapabilities.setCapability("automationName", "uiautomator2");
-        desiredCapabilities.setCapability(MobileCapabilityType.APP, "C:\\Users\\wcaqu\\eclipse-workspace\\CursoAppium\\CTAppium_1_2.apk");
-        desiredCapabilities.setCapability("autoGrantPermissions", true);
+        desiredCapabilities.setCapability(MobileCapabilityType.APP, "C:\\Users\\wcaqu\\eclipse-workspace\\CursoAppium\\CTAppium_2_0.apk");
+//        desiredCapabilities.setCapability("autoGrantPermissions", true);
 //        desiredCapabilities.setCapability("noReset", true);
-        desiredCapabilities.setCapability("appWaitPackage", "com.google.android.permissioncontroller");
-	    desiredCapabilities.setCapability("appWaitActivity", "com.android.packageinstaller.permission.ui.ReviewPermissionsActivity");
+//        desiredCapabilities.setCapability("appWaitPackage", "com.google.android.permissioncontroller");
+//	    desiredCapabilities.setCapability("appWaitActivity", "com.android.packageinstaller.permission.ui.ReviewPermissionsActivity");
         
         try {
 			driver = new AndroidDriver<MobileElement>(new URL("http://127.0.0.1:4723/wd/hub"), desiredCapabilities);
@@ -40,8 +40,8 @@ public class DriverFactory {
 			e.printStackTrace();
 		}
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-        driver.findElement(By.xpath("//android.widget.Button[@text='Continue']")).click();
-        driver.findElement(By.xpath("//*[@text='OK']")).click();
+//        driver.findElement(By.xpath("//android.widget.Button[@text='Continue']")).click();
+//        driver.findElement(By.xpath("//*[@text='OK']")).click();
     }
     
     private static void createTestObjectDriver() {

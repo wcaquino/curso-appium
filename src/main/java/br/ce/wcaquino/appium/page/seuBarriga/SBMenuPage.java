@@ -5,18 +5,18 @@ import br.ce.wcaquino.appium.core.BasePage;
 public class SBMenuPage extends BasePage {
 
 	public void acessarContas(){
-		clicarPorTexto("CONTAS");
+		clicarPorTexto("Contas");
 	}
 	
 	public void acessarMovimentacoes(){
-		clicarPorTexto("MOV...");
+		clicarPorTexto("Mov...");
 	}
 	
 	public void acessarResumo(){
-		clicarPorTexto("RESUMO");
+		clicarPorTexto("Resumo");
 	}
 	
 	public void acessarHome(){
-		clicarPorTexto("HOME");
+		clicarPorTexto("Home");
 	}
 }

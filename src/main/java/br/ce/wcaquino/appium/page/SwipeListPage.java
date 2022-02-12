@@ -21,9 +21,9 @@ public class SwipeListPage extends BasePage {
 	}
 	
 	public void clicarBotaoMais(){
-		MobileElement botao = getDriver().findElement(By.xpath("//*[@text='(+)']/.."));
+		MobileElement botao = getDriver().findElement(By.xpath("//android.widget.TextView[@text='(+)']/.."));
 		new TouchAction<>(getDriver())
-			.tap(TapOptions.tapOptions().withElement(ElementOption.element(botao, -50, 0)))
+			.tap(TapOptions.tapOptions().withElement(ElementOption.element(botao, 50, 0)))
 			.perform();
 	}
 }

@@ -18,13 +18,13 @@ public class BaseTest {
 	
 	@AfterClass
 	public static void finalizaClasse(){
-		DriverFactory.killDriver();
 	}
 	
     @After
     public void tearDown() {
     	gerarScreenShot();
-    	DriverFactory.getDriver().resetApp();
+    	DriverFactory.killDriver();
+//    	DriverFactory.getDriver().resetApp();
     }
     
     public void gerarScreenShot() {

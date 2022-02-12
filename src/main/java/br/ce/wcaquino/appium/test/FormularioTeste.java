@@ -86,7 +86,7 @@ public class FormularioTeste extends BaseTest {
     	page.clicarPorTexto("01/01/2000");
     	page.clicarPorTexto("20");
     	page.clicarPorTexto("OK");
-    	Assert.assertTrue(page.existeElementoPorTexto("20/2/2000"));
+    	Assert.assertTrue(page.existeElementoPorTexto("20/01/2000"));
     }
     
     @Test

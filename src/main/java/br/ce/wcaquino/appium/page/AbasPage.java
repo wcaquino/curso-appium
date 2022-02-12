@@ -13,6 +13,6 @@ public class AbasPage extends BasePage {
 	}
 	
 	public void selecionarAba2(){
-		clicarPorTexto("ABA 2");
+		clicarPorTexto("Aba 2");
 	}
 }

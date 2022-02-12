@@ -125,6 +125,7 @@ public class BasePage {
 	public void cliqueLongo(By by) {
 		new TouchAction<>(getDriver())
 		.longPress(PointOption.point(getDriver().findElement(by).getCenter()))
+		.release()
 		.perform();
 	}
 }

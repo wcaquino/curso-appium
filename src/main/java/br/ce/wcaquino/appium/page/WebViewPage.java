@@ -12,9 +12,9 @@ public class WebViewPage extends BasePage {
 	
 	public void entrarContextoWeb(){
 		Set<String> contextHandles = getDriver().getContextHandles();
-//		for(String valor: contextHandles) {
-//			System.out.println(valor);
-//		}
+		for(String valor: contextHandles) {
+			System.out.println(valor);
+		}
 		getDriver().context((String) contextHandles.toArray()[1]);
 	}
 
