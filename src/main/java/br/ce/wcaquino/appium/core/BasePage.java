@@ -3,17 +3,21 @@ package br.ce.wcaquino.appium.core;
 import static br.ce.wcaquino.appium.core.DriverFactory.getDriver;
 
 import java.time.Duration;
+import java.util.Arrays;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
-import org.openqa.selenium.Point;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Pause;
+import org.openqa.selenium.interactions.PointerInput;
+import org.openqa.selenium.interactions.PointerInput.Kind;
+import org.openqa.selenium.interactions.PointerInput.MouseButton;
+import org.openqa.selenium.interactions.Sequence;
+import org.openqa.selenium.remote.RemoteWebElement;
 
-import io.appium.java_client.MobileElement;
-import io.appium.java_client.TouchAction;
-import io.appium.java_client.touch.WaitOptions;
-import io.appium.java_client.touch.offset.PointOption;
+import com.google.common.collect.ImmutableMap;
 
 public class BasePage {
 
@@ -43,7 +47,7 @@ public class BasePage {
 	}
 	
 	public boolean existeElementoPorTexto(String texto) {
-		List<MobileElement> elementos = getDriver().findElements(By.xpath("//*[@text='"+texto+"']"));
+		List<WebElement> elementos = getDriver().findElements(By.xpath("//*[@text='"+texto+"']"));
 		return elementos.size() > 0;
 	}
 	
@@ -56,23 +60,28 @@ public class BasePage {
 	}
 	
 	public void tap(int x, int y) {
-		new TouchAction<>(getDriver()).tap(PointOption.point(new Point(x, y))).perform();
+		PointerInput FINGER = new PointerInput(Kind.TOUCH, "finger");
+		Sequence tap = new Sequence(FINGER, 1)
+                .addAction(FINGER.createPointerMove(Duration.ofMillis(0), PointerInput.Origin.viewport(), x, y))
+                .addAction(FINGER.createPointerDown(MouseButton.LEFT.asArg()))
+                .addAction(FINGER.createPointerUp(MouseButton.LEFT.asArg()));
+        getDriver().perform(Arrays.asList(tap));
 	}
-	
+
 	public void scrollDown(){
-		scroll(0.9, 0.1);
-	}
-	
-	public void scrollUp(){
 		scroll(0.1, 0.9);
 	}
 	
+	public void scrollUp(){
+		scroll(0.9, 0.1);
+	}
+	
 	public void swipeLeft(){
-		swipe(0.1, 0.9);
+		swipe(0.9, 0.1);
 	}
 	
 	public void swipeRight(){
-		swipe(0.9, 0.1);
+		swipe(0.1, 0.9);
 	}
 	
 	public void scroll(double inicio, double fim) {
@@ -83,12 +92,7 @@ public class BasePage {
 		int start_y = (int) (size.height * inicio);
 		int end_y = (int) (size.height * fim);
 		
-		new TouchAction<>(getDriver())
-			.press(PointOption.point(new Point(x, start_y)))
-			.waitAction(WaitOptions.waitOptions(Duration.ofMillis(500)))
-			.moveTo(PointOption.point(new Point(x, end_y)))
-			.release()
-			.perform();
+		genericSwipe(x, start_y, x, end_y);
 	}
 	
 	public void swipe(double inicio, double fim) {
@@ -99,33 +103,39 @@ public class BasePage {
 		int start_x = (int) (size.width * inicio);
 		int end_x = (int) (size.width * fim);
 		
-		new TouchAction<>(getDriver())
-		.press(PointOption.point(new Point(start_x, y)))
-		.waitAction(WaitOptions.waitOptions(Duration.ofMillis(500)))
-		.moveTo(PointOption.point(new Point(end_x, y)))
-		.release()
-		.perform();
+		genericSwipe(start_x, y, end_x, y);
 	}
-	
 
-	public void swipeElement(MobileElement element, double inicio, double fim) {
+	public void swipeElement(WebElement element, double inicio, double fim) {
 		int y = element.getLocation().y + (element.getSize().height / 2);
 		
 		int start_x = (int) (element.getSize().width * inicio);
 		int end_x = (int) (element.getSize().width * fim);
 		
-		new TouchAction<>(getDriver())
-		.press(PointOption.point(new Point(start_x, y)))
-		.waitAction(WaitOptions.waitOptions(Duration.ofMillis(500)))
-		.moveTo(PointOption.point(new Point(end_x, y)))
-		.release()
-		.perform();
+		genericSwipe(start_x, y, end_x, y);
 	}
 	
+	public void genericSwipe(int startX, int startY, int endX, int endY) {
+		PointerInput FINGER = new PointerInput(Kind.TOUCH, "finger");
+		Sequence drag = new Sequence(FINGER, 1)
+                .addAction(FINGER.createPointerMove(Duration.ofMillis(0), PointerInput.Origin.viewport(), 
+                		startX, startY))
+                .addAction(FINGER.createPointerDown(MouseButton.LEFT.asArg()))
+                .addAction(new Pause(FINGER, Duration.ofMillis(500)))
+                .addAction(FINGER.createPointerMove(Duration.ofMillis(1000), PointerInput.Origin.viewport(), 
+                		endX, endY))
+                .addAction(FINGER.createPointerUp(MouseButton.LEFT.asArg()));
+        getDriver().perform(Arrays.asList(drag));
+	}
+	
+	
+	//Gestures reference
+	// https://github.com/appium/appium-uiautomator2-driver/blob/master/docs/android-mobile-gestures.md#mobile-draggesture
+	
 	public void cliqueLongo(By by) {
-		new TouchAction<>(getDriver())
-		.longPress(PointOption.point(getDriver().findElement(by).getCenter()))
-		.release()
-		.perform();
+		((JavascriptExecutor) getDriver()).executeScript("mobile: longClickGesture", ImmutableMap.of(
+			    "elementId", ((RemoteWebElement) getDriver().findElement(by)).getId(),
+			    "duration", 1000
+			));
 	}
 }

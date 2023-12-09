@@ -18,7 +18,7 @@ public class SwipeElementTeste extends BaseTest {
 		menu.clicarSwipeList();
 		
 		//2 - op1 para direita
-		page.swipeElementRight("Opção 1");
+		page.swipeElementLeft("Opção 1");
 		
 		//3 - op1 +
 		page.clicarBotaoMais();
@@ -27,7 +27,7 @@ public class SwipeElementTeste extends BaseTest {
 		Assert.assertTrue(page.existeElementoPorTexto("Opção 1 (+)"));
 		
 		// 5 - op4 para direita
-		page.swipeElementRight("Opção 4");
+		page.swipeElementLeft("Opção 4");
 		
 		// 6 - op4 -
 		page.clicarPorTexto("(-)");
@@ -36,7 +36,7 @@ public class SwipeElementTeste extends BaseTest {
 		Assert.assertTrue(page.existeElementoPorTexto("Opção 4 (-)"));
 		
 		//8 - op5 para esquerda
-		page.swipeElementLeft("Opção 5 (-)");
+		page.swipeElementRight("Opção 5 (-)");
 		
 		//9 - verificar op5
 		Assert.assertTrue(page.existeElementoPorTexto("Opção 5"));

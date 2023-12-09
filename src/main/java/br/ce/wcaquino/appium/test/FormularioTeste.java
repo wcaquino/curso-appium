@@ -3,7 +3,7 @@ package br.ce.wcaquino.appium.test;
 import static org.junit.Assert.assertEquals;
 
 import java.net.MalformedURLException;
-import java.util.concurrent.TimeUnit;
+import java.time.Duration;
 
 import org.junit.Assert;
 import org.junit.Before;
@@ -16,7 +16,7 @@ import br.ce.wcaquino.appium.core.BaseTest;
 import br.ce.wcaquino.appium.core.DriverFactory;
 import br.ce.wcaquino.appium.page.FormularioPage;
 import br.ce.wcaquino.appium.page.MenuPage;
-import io.appium.java_client.MobileBy;
+import io.appium.java_client.AppiumBy;
 
 public class FormularioTeste extends BaseTest {
     
@@ -72,10 +72,10 @@ public class FormularioTeste extends BaseTest {
     public void deveRealizarCadastroDemorado() throws MalformedURLException {
     	page.escreverNome("Wagner");
         
-    	DriverFactory.getDriver().manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
+    	DriverFactory.getDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(0));
         page.salvarDemorado();
 //        esperar(3000);
-        WebDriverWait wait = new WebDriverWait(DriverFactory.getDriver(), 10);
+        WebDriverWait wait = new WebDriverWait(DriverFactory.getDriver(), Duration.ofSeconds(10));
         wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@text='Nome: Wagner']")));
         
         Assert.assertEquals("Nome: Wagner", page.obterNomeCadastrado());
@@ -92,8 +92,8 @@ public class FormularioTeste extends BaseTest {
     @Test
     public void deveAlterarHora(){
     	page.clicarPorTexto("06:00");
-    	page.clicar(MobileBy.AccessibilityId("10"));
-    	page.clicar(MobileBy.AccessibilityId("40"));
+    	page.clicar(AppiumBy.accessibilityId("10"));
+    	page.clicar(AppiumBy.accessibilityId("40"));
     	page.clicarPorTexto("OK");
     	Assert.assertTrue(page.existeElementoPorTexto("10:40"));
     }
