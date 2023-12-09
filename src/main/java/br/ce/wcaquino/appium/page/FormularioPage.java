@@ -3,23 +3,23 @@ package br.ce.wcaquino.appium.page;
 import static br.ce.wcaquino.appium.core.DriverFactory.getDriver;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 
 import br.ce.wcaquino.appium.core.BasePage;
-import io.appium.java_client.MobileBy;
-import io.appium.java_client.MobileElement;
+import io.appium.java_client.AppiumBy;
 
 public class FormularioPage extends BasePage {
 	
 	public void escreverNome(String nome) {
-		escrever(MobileBy.AccessibilityId("nome"), nome);
+		escrever(AppiumBy.accessibilityId("nome"), nome);
 	}
 	
 	public String obterNome() {
-		return obterTexto(MobileBy.AccessibilityId("nome"));
+		return obterTexto(AppiumBy.accessibilityId("nome"));
 	}
 	
 	public void selecionarCombo(String valor) {
-		selecionarCombo(MobileBy.AccessibilityId("console"), valor);
+		selecionarCombo(AppiumBy.accessibilityId("console"), valor);
 	}
 	
 	public String obterValorCombo(){
@@ -31,7 +31,7 @@ public class FormularioPage extends BasePage {
 	}
 	
 	public void clicarSwitch(){
-		clicar(MobileBy.AccessibilityId("switch"));
+		clicar(AppiumBy.accessibilityId("switch"));
 	}
 	
 	public boolean isCheckMarcado(){
@@ -39,12 +39,12 @@ public class FormularioPage extends BasePage {
 	}
 	
 	public boolean isSwitchMarcado() {
-		return isCheckMarcado(MobileBy.AccessibilityId("switch"));
+		return isCheckMarcado(AppiumBy.accessibilityId("switch"));
 	}
 	
 	public void clicarSeekBar(double posicao){
 		int delta = 50;
-		MobileElement seek = getDriver().findElement(MobileBy.AccessibilityId("slid"));
+		WebElement seek = getDriver().findElement(AppiumBy.accessibilityId("slid"));
 		int y = seek.getLocation().y + (seek.getSize().height / 2);
 		System.out.println(y);
 		

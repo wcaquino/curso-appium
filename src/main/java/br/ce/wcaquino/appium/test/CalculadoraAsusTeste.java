@@ -5,9 +5,11 @@ import java.net.URL;
 
 import org.junit.Assert;
 import org.junit.Test;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
-import io.appium.java_client.MobileElement;
+import io.appium.java_client.AppiumBy;
+import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.android.AndroidDriver;
 
 public class CalculadoraAsusTeste {
@@ -21,17 +23,17 @@ public class CalculadoraAsusTeste {
 	    desiredCapabilities.setCapability("appPackage", "com.asus.calculator");
 	    desiredCapabilities.setCapability("appActivity", "com.asus.calculator.Calculator");
 	    
-	    AndroidDriver<MobileElement> driver = new AndroidDriver(new URL("http://127.0.0.1:4723/wd/hub"), desiredCapabilities);
+	    AppiumDriver driver = new AndroidDriver(new URL("http://127.0.0.1:4723/wd/hub"), desiredCapabilities);
 	    
-	    MobileElement el1 = (MobileElement) driver.findElementById("com.asus.calculator:id/digit2");
+	    WebElement el1 = (WebElement) driver.findElement(AppiumBy.id("com.asus.calculator:id/digit2"));
 	    el1.click();
-	    MobileElement el2 = (MobileElement) driver.findElementByAccessibilityId("mais");
+	    WebElement el2 = (WebElement) driver.findElement(AppiumBy.accessibilityId("mais"));
 	    el2.click();
-	    MobileElement el3 = (MobileElement) driver.findElementById("com.asus.calculator:id/digit2");
+	    WebElement el3 = (WebElement) driver.findElement(AppiumBy.id("com.asus.calculator:id/digit2"));
 	    el3.click();
-	    MobileElement el4 = (MobileElement) driver.findElementByAccessibilityId("igual");
+	    WebElement el4 = (WebElement) driver.findElement(AppiumBy.accessibilityId("igual"));
 	    el4.click();
-	    MobileElement el5 = (MobileElement) driver.findElementByAccessibilityId("4");
+	    WebElement el5 = (WebElement) driver.findElement(AppiumBy.accessibilityId("4"));
 	    Assert.assertEquals("4", el5.getText());
 	    
 	    driver.quit();

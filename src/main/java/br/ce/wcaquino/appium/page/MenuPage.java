@@ -2,6 +2,8 @@ package br.ce.wcaquino.appium.page;
 
 import static br.ce.wcaquino.appium.core.DriverFactory.getDriver;
 
+import java.time.Duration;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -39,16 +41,16 @@ public class MenuPage extends BasePage {
 	}
 	
 	public void clicarSwipeList(){
-		WebDriverWait wait = new WebDriverWait(getDriver(), 10);
+		WebDriverWait wait = new WebDriverWait(getDriver(), Duration.ofSeconds(10));
 		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@text='Formulário']")));
 		scrollDown();
 		clicarPorTexto("Swipe List");
 	}
 	
 	public void clicarDragNDrop(){
-		WebDriverWait wait = new WebDriverWait(getDriver(), 10);
+		WebDriverWait wait = new WebDriverWait(getDriver(), Duration.ofSeconds(10));
 		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@text='Formulário']")));
-		scrollDown();
+		scrollUp();
 		clicarPorTexto("Drag and drop");
 	}
 	

@@ -109,7 +109,7 @@ public class SBTeste extends BaseTest {
 		
 		//atualizar saldos
 		esperar(1000);
-		home.scroll(0.2, 0.9);
+		home.scrollDown();
 		
 		//verificar saldo = -1000.00
 		Assert.assertEquals("-1000.00", home.obterSaldoConta("Conta para saldo"));

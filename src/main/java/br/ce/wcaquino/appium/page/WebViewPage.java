@@ -15,7 +15,7 @@ public class WebViewPage extends BasePage {
 		for(String valor: contextHandles) {
 			System.out.println(valor);
 		}
-		getDriver().context((String) contextHandles.toArray()[1]);
+		getDriver().context((String)contextHandles.toArray()[1]);
 	}
 
 	public void setEmail(String valor) {
