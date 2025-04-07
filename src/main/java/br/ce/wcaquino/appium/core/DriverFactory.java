@@ -1,13 +1,16 @@
 package br.ce.wcaquino.appium.core;
 
+import java.io.File;
 import java.net.MalformedURLException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.time.Duration;
 
 import org.openqa.selenium.MutableCapabilities;
-import org.openqa.selenium.remote.DesiredCapabilities;
 
 import io.appium.java_client.android.AndroidDriver;
+import io.appium.java_client.android.options.UiAutomator2Options;
 
 public class DriverFactory {
 
@@ -22,14 +25,12 @@ public class DriverFactory {
 	}
     
     private static void createDriver() {
-        DesiredCapabilities desiredCapabilities = new DesiredCapabilities();
-        desiredCapabilities.setCapability("platformName", "Android");
-        desiredCapabilities.setCapability("deviceName", "emulator-5554");
-        desiredCapabilities.setCapability("automationName", "uiautomator2");
-        desiredCapabilities.setCapability("app", "C:\\Users\\Wcaquino\\code\\cursos\\curso-appium\\CTAppium_2_0.apk");      
+    	UiAutomator2Options options = new UiAutomator2Options()
+    		    .setUdid("emulator-5554")
+    		    .setApp(new File("CTAppium_2_0.apk").getAbsolutePath());
         try {
-			driver = new AndroidDriver(new URL("http://127.0.0.1:4723/wd/hub"), desiredCapabilities);
-		} catch (MalformedURLException e) {
+			driver = new AndroidDriver(new URI("http://127.0.0.1:4723/").toURL(), options);
+		} catch (MalformedURLException | URISyntaxException e) {
 			e.printStackTrace();
 		}
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
@@ -70,5 +71,10 @@ public class DriverFactory {
     		driver.quit();
     		driver = null;
     	}
+    }
+    
+    public static void resetApp() {
+    	getDriver().terminateApp("com.ctappium");
+    	getDriver().activateApp("com.ctappium");
     }
 }
